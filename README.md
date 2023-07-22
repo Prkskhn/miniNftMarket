@@ -30,7 +30,7 @@
 `❗️❗️메타마스크 네트워크는 Matic Mumbaifh 이고 실행 전, 다음 링크를 통해 Matic을 충전 하실 수 있습니다.` [Matic 충전 링크](https://faucet.polygon.technology/)
 <br>
 
-<details>
+
 <summary>1.  "connect" 버튼으로 메타마스크 연결하기</summary>
 <div markdown="1">
 
@@ -41,9 +41,9 @@
 ```
 
 </div>
-</details>
 
-<details>
+
+
 <summary>2. NFT card의 "Go Mint" 버튼을 눌러 Free민팅 진행.</summary>
 <div markdown="1">
 <img src="https://github.com/Prkskhn/miniNftMarket/assets/104644024/b1002964-43b9-40de-956c-f0e26da2cbaa" width="" height="">
@@ -53,9 +53,9 @@
 ```
 
 </div>
-</details>
 
-<details>
+
+
 <summary>3. 민팅한 이미지 판매하기</summary>
 <div markdown="1">
 <img src="https://github.com/Prkskhn/miniNftMarket/assets/104644024/a875e34c-7234-4b09-9e39-1220a904ca13" width="" height="">
@@ -65,9 +65,9 @@
 ```
 
 </div>
-</details>
 
-<details>
+
+
 <summary>4-1  판매 중인 NFT 구매하기.</summary>
 <div markdown="1">
 <img src="https://github.com/Prkskhn/miniNftMarket/assets/104644024/643b4548-d6ce-40d1-9672-befa13ed1b99" width="" height="">
@@ -78,9 +78,9 @@
 ```
 
 </div>
-</details>
 
-<details>
+
+
 <summary>4-2  판매 중인 NFT 구매하기.</summary>
 <div markdown="1">
 <img src="https://github.com/Prkskhn/miniNftMarket/assets/104644024/6957edb8-1311-4697-92e7-b55874fd743a" width="50%" height=""><img src="https://github.com/Prkskhn/miniNftMarket/assets/104644024/e34a2118-5287-44ac-b3c0-1ded0180d306" width="50%" height="">
@@ -89,7 +89,7 @@
 * 판매 중인 상태의 NFT를  Buy버튼을 눌러 SH코인을 지불하고 구매할 수 있습니다.
 ```
 </div>
-</details>
+
 
 <br>
 
