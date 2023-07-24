@@ -1,29 +1,28 @@
 // SPDX-License-Identifier: MIT
- 
 pragma solidity ^0.8.18;
 
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
-import "./miniToken_ERC20.sol";
+//import "./mintpage20.sol";
 
 contract MintNft is ERC721Enumerable {
     string public metadataUri;
     uint public totalNft;
     uint public mintedNft;
     mapping(uint=>bool) public sold;
-    SHToken shToken;
+    //SHToken shToken;
 
     constructor(
         string memory _name, 
         string memory _symbol, 
         string memory _metadataUri, 
-        uint _totalNft,
-        address _tokenContract
+        uint _totalNft
+        //address _tokenContract
 
     ) ERC721(_name, _symbol) {
         metadataUri = _metadataUri;
         totalNft = _totalNft;
-        shToken=SHToken(payable (_tokenContract));
+        //shToken=SHToken(payable (_tokenContract));
     }
 
 
@@ -52,20 +51,5 @@ contract MintNft is ERC721Enumerable {
 
         _burn(_tokenId);
     }
-
-
-    function buyNFT(uint _tokenId,address _to, uint _coinAmount) public {
-        //shToken.transfer( _to, _coinAmount);
-        shToken.buyNftWithErc20(msg.sender, ownerOf(_tokenId), _coinAmount);
-        // Execute transferFrom
-        _transfer(ownerOf(_tokenId),_to, _tokenId);
-    }
-    
-    
-    function getBalance()public view returns(uint){
-        return shToken.balanceOf(msg.sender);
-    }
-
-    
 
 }
