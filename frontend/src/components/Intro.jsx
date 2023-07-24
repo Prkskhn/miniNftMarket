@@ -5,7 +5,8 @@ const Intro = ({ totalNft, mintedNft, myNft, token }) => {
   const ranNum = Math.floor(Math.random() * 27 + 1);
   const imgSrc = `${process.env.REACT_APP_IMAGE_URL}/${ranNum}.png`;
 
-  const { account, tokenContract, token_c_address } = useContext(AppContext);
+  const { account, shToken_contract, shToken_c_address } =
+    useContext(AppContext);
 
   const onClickTokenMint = async () => {
     try {
@@ -14,8 +15,8 @@ const Intro = ({ totalNft, mintedNft, myNft, token }) => {
         params: [
           {
             from: account,
-            to: token_c_address,
-            data: tokenContract.methods.MintToken(100).encodeABI(),
+            to: shToken_c_address,
+            data: shToken_contract.methods.MintToken(100).encodeABI(),
             gas: "100000",
           },
         ],

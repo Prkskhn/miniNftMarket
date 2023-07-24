@@ -3,13 +3,19 @@ import { Link } from "react-router-dom";
 import { AppContext } from "../App";
 
 const NftCard = ({ tokenId, metadata, mintedNft }) => {
-  const { contract, account, c_address } = useContext(AppContext);
+  const {
+    account,
+    exchange_contract,
+    mintNft_contract,
+    exchange_c_address,
+    mintNft_c_address,
+  } = useContext(AppContext);
   const [ownerAccount, setOwnerAccount] = useState("");
   const [cansold, setCanSold] = useState(false);
 
   const getCanSold = async () => {
     try {
-      const response = await contract.methods.sold(tokenId).call();
+      const response = await mintNft_contract.methods.sold(tokenId).call();
       setCanSold(response);
     } catch {}
   };
@@ -21,8 +27,8 @@ const NftCard = ({ tokenId, metadata, mintedNft }) => {
         params: [
           {
             from: account,
-            to: c_address,
-            data: contract.methods.mintNft(tokenId).encodeABI(),
+            to: mintNft_c_address,
+            data: mintNft_contract.methods.mintNft(tokenId).encodeABI(),
             gas: "100000",
           },
         ],
@@ -38,8 +44,8 @@ const NftCard = ({ tokenId, metadata, mintedNft }) => {
         params: [
           {
             from: account,
-            to: c_address,
-            data: contract.methods.buyNFT(tokenId, account, 13).encodeABI(),
+            to: exchange_c_address,
+            data: exchange_contract.methods.buyNft(tokenId, 13).encodeABI(),
             gas: "100000",
           },
         ],
@@ -49,8 +55,10 @@ const NftCard = ({ tokenId, metadata, mintedNft }) => {
         params: [
           {
             from: account,
-            to: c_address,
-            data: contract.methods.setTokenSold(tokenId, false).encodeABI(),
+            to: mintNft_c_address,
+            data: mintNft_contract.methods
+              .setTokenSold(tokenId, false)
+              .encodeABI(),
             gas: "100000",
           },
         ],
@@ -61,7 +69,7 @@ const NftCard = ({ tokenId, metadata, mintedNft }) => {
   };
   const getOwnerOf = async () => {
     try {
-      const response = await contract.methods.ownerOf(tokenId).call();
+      const response = await mintNft_contract.methods.ownerOf(tokenId).call();
       setOwnerAccount(response);
     } catch {}
   };
@@ -73,8 +81,23 @@ const NftCard = ({ tokenId, metadata, mintedNft }) => {
         params: [
           {
             from: account,
-            to: c_address,
-            data: contract.methods.setTokenSold(tokenId, true).encodeABI(),
+            to: mintNft_c_address,
+            data: mintNft_contract.methods
+              .setApprovalForAll(exchange_c_address, true)
+              .encodeABI(),
+            gas: "100000",
+          },
+        ],
+      });
+      await window.ethereum.request({
+        method: "eth_sendTransaction",
+        params: [
+          {
+            from: account,
+            to: mintNft_c_address,
+            data: mintNft_contract.methods
+              .setTokenSold(tokenId, true)
+              .encodeABI(),
             gas: "100000",
           },
         ],
@@ -90,8 +113,10 @@ const NftCard = ({ tokenId, metadata, mintedNft }) => {
         params: [
           {
             from: account,
-            to: c_address,
-            data: contract.methods.setTokenSold(tokenId, false).encodeABI(),
+            to: mintNft_c_address,
+            data: mintNft_contract.methods
+              .setTokenSold(tokenId, false)
+              .encodeABI(),
             gas: "100000",
             ok: true,
           },

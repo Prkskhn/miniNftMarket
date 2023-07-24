@@ -4,8 +4,9 @@ import Nft from "../components/Nft";
 import { AppContext } from "../App";
 
 const Main = () => {
-  const { account, contract, tokenContract } = useContext(AppContext);
-  console.log("컨트랙트주소", contract);
+  const { account, mintNft_contract, shToken_contract } =
+    useContext(AppContext);
+  console.log("컨트랙트주소", mintNft_contract);
 
   const [totalNft, setTotalNft] = useState(0);
   const [mintedNft, setMintedNft] = useState(0);
@@ -14,7 +15,7 @@ const Main = () => {
 
   const getTotalNft = async () => {
     try {
-      const response = await contract.methods.totalNft().call();
+      const response = await mintNft_contract.methods.totalNft().call();
       setTotalNft(response);
       //console.log("총nft", response);
     } catch (error) {
@@ -24,7 +25,7 @@ const Main = () => {
 
   const getMintedNft = async () => {
     try {
-      const response = await contract.methods.totalSupply().call();
+      const response = await mintNft_contract.methods.totalSupply().call();
       setMintedNft(response);
       //console.log("민팅nft", response);
     } catch (error) {
@@ -35,7 +36,7 @@ const Main = () => {
   const getMyNft = async () => {
     try {
       if (!account) return;
-      const response = await contract.methods.balanceOf(account).call();
+      const response = await mintNft_contract.methods.balanceOf(account).call();
       setMyNft(response);
       //console.log("나의nft11", response);
     } catch (error) {
@@ -45,7 +46,7 @@ const Main = () => {
   const getToken = async () => {
     try {
       if (!account) return;
-      const response = await tokenContract.methods.balanceOf(account).call();
+      const response = await shToken_contract.methods.balanceOf(account).call();
       setToken(response);
       console.log("나의잔액11", response);
     } catch (error) {

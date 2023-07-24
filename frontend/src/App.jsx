@@ -1,8 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Web3 from "web3";
 import Header from "./components/Header";
-import CONTRACT_ABI from "./abi/contractABI.json";
-import TOKEN_CONTRACT_ABI from "./abi/tokenABI.json";
+import ExchangeABI from "./abi/exchangeABI.json";
+import MintNftABI from "./abi/mintNftABI.json";
+import ShTokenABI from "./abi/shTokenABI.json";
 import Main from "./pages/main";
 import { createContext, useState } from "react";
 import Detail from "./pages/detail";
@@ -12,12 +13,26 @@ export const AppContext = createContext();
 export default function App() {
   const [account, setAccount] = useState("");
   const web3 = new Web3(process.env.REACT_APP_PROVIDER);
-  const c_address = "0x90Dd0737E64C3bA91277b547D0ce01d3620F82F9";
-  const c_abi = CONTRACT_ABI;
-  const token_c_address = "0xE7e5099aa128BB2c16d413afBfF502940f096f89";
-  const token_c_abi = TOKEN_CONTRACT_ABI;
-  const contract = new web3.eth.Contract(c_abi, c_address);
-  const tokenContract = new web3.eth.Contract(token_c_abi, token_c_address);
+  const exchange_c_address = "0xB13C3f88734e08c48C02D74025Cf6699bA1f59d0";
+  const mintNft_c_address = "0x21AAa296b817D361Ad0389b4Dce24B4389664b58";
+  const shToken_c_address = "0x7fdeD157CE1294eF67A7960BE59D16072e5c4d66";
+
+  const exchange_c_abi = ExchangeABI;
+  const mintNft_c_abi = MintNftABI;
+  const shToken_c_abi = ShTokenABI;
+
+  const exchange_contract = new web3.eth.Contract(
+    exchange_c_abi,
+    exchange_c_address
+  );
+  const mintNft_contract = new web3.eth.Contract(
+    mintNft_c_abi,
+    mintNft_c_address
+  );
+  const shToken_contract = new web3.eth.Contract(
+    shToken_c_abi,
+    shToken_c_address
+  );
 
   return (
     <BrowserRouter>
@@ -25,12 +40,14 @@ export default function App() {
         <Header account={account} setAccount={setAccount} />
         <AppContext.Provider
           value={{
-            c_address,
-            contract,
             account,
             setAccount,
-            tokenContract,
-            token_c_address,
+            exchange_c_address,
+            mintNft_c_address,
+            shToken_c_address,
+            exchange_contract,
+            mintNft_contract,
+            shToken_contract,
           }}
         >
           <Routes>
