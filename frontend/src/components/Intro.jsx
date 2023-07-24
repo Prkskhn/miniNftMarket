@@ -5,8 +5,7 @@ const Intro = ({ totalNft, mintedNft, myNft, token }) => {
   const ranNum = Math.floor(Math.random() * 27 + 1);
   const imgSrc = `${process.env.REACT_APP_IMAGE_URL}/${ranNum}.png`;
 
-  const { contract, account, c_address, tokenContract, token_c_address } =
-    useContext(AppContext);
+  const { account, tokenContract, token_c_address } = useContext(AppContext);
 
   const onClickTokenMint = async () => {
     try {
@@ -54,7 +53,9 @@ const Intro = ({ totalNft, mintedNft, myNft, token }) => {
         <div className="flex flex-col justify-center items-center m-2 px-4 py-2 rounded-md bg-purple-500 text-white ">
           <button onClick={onClickTokenMint}> SH코인 무료 충전하기</button>
         </div>
-        <div className="bg-white w-48">잔액:{Number(token)}</div>
+        <div className="bg-white w-48 h-8 px-4 flex justify-between  items-center rounded-md">
+          <div>잔액:</div> <div>{Number(token)} SH</div>
+        </div>
       </div>
     </div>
   );

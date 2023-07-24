@@ -39,7 +39,7 @@ const NftCard = ({ tokenId, metadata, mintedNft }) => {
           {
             from: account,
             to: c_address,
-            data: contract.methods.buyNFT(tokenId, account, 10).encodeABI(),
+            data: contract.methods.buyNFT(tokenId, account, 13).encodeABI(),
             gas: "100000",
           },
         ],
